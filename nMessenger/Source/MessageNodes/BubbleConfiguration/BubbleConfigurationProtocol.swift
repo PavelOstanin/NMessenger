@@ -21,6 +21,10 @@ public protocol BubbleConfigurationProtocol {
     /** Create and return a UI color representing an outgoing message */
     func getOutgoingColor() -> UIColor
     
+    func getAcceptColor() -> UIColor
+    
+    func getDeclineColor() -> UIColor
+    
     /** Create and return a bubble for the ContentNode */
     func getBubble() -> Bubble
     

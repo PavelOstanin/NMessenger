@@ -35,7 +35,7 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
     //CGFloat to the fine the number of rows a user can type
     open var numberOfRows:CGFloat = 3
     //String as placeholder text in input view
-    open var inputTextViewPlaceholder: String = "NMessenger"
+    open var inputTextViewPlaceholder: String = "Aa"
     {
         willSet(newVal)
         {
@@ -88,13 +88,13 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
      Loads the view from nib file InputBarView and does intial setup.
      */
     fileprivate func loadFromBundle() {
-        _ = Bundle(for: NMessengerViewController.self).loadNibNamed("NMessengerBarView", owner: self, options: nil)?[0] as! UIView
+        inputBarView = Bundle(for: NMessengerViewController.self).loadNibNamed("NMessengerBarView", owner: self, options: nil)?[0] as! UIView
         self.addSubview(inputBarView)
         inputBarView.frame = self.bounds
+        self.setupBarView()
         textInputView.delegate = self
         self.sendButton.isEnabled = false
         cameraVC.cameraDelegate = self
-
     }
     
     //MARK: TextView delegate methods

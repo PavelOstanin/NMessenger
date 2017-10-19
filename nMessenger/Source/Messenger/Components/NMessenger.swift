@@ -299,6 +299,7 @@ open class NMessenger: UIView {
             DispatchQueue.main.async {
                 if let indexPath = self.messengerNode.indexPath(for: message) {
                     self.scrollToIndex((indexPath as NSIndexPath).row, inSection: (indexPath as NSIndexPath).section, atPosition: position, animated: animated)
+                    
                 }
                 //unlock the semaphore
                 self.state.messageLock.signal()
