@@ -38,6 +38,11 @@ open class SimpleBubbleConfiguration: BubbleConfigurationProtocol {
         return UIColor.n1Black50Color()
     }
     
+    open func getDeliveredColor() -> UIColor
+    {
+        return UIColor.n1BlueColor()
+    }
+    
     open func getBubble() -> Bubble
     {
         let newBubble = SimpleBubble()

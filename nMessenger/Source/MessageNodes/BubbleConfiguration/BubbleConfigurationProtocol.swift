@@ -25,6 +25,8 @@ public protocol BubbleConfigurationProtocol {
     
     func getDeclineColor() -> UIColor
     
+    func getDeliveredColor() -> UIColor
+    
     /** Create and return a bubble for the ContentNode */
     func getBubble() -> Bubble
     

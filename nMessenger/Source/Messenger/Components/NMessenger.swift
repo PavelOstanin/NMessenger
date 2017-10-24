@@ -57,7 +57,11 @@ open class NMessenger: UIView {
     //MARK: Private variables
     
     /** ASTableView for messages*/
-    open var messengerNode:ASTableNode = ASTableNode()
+    open var messengerNode:ASTableNode = ASTableNode.init(style: .grouped)
+    
+    open var messengerNodeHeader:UIView = UIView()
+    open var messengerNodeHeadreHeight:CGFloat = 5
+    
     /** Holds a state for the amount of content and if the messenger is fetching or not */
     fileprivate var state: NMessengerState = .initialState
     /** Used internally to prevent unwrapping for every usage*/
@@ -111,7 +115,7 @@ open class NMessenger: UIView {
         messengerNode.dataSource = self
         
         messengerNode.setTuningParameters(ASRangeTuningParameters(leadingBufferScreenfuls: 2, trailingBufferScreenfuls: 1), for: .display)
-        
+        messengerNode.view.backgroundColor = UIColor.white
         messengerNode.view.separatorStyle = UITableViewCellSeparatorStyle.none
         messengerNode.view.allowsSelection = false
         messengerNode.view.showsVerticalScrollIndicator = false
@@ -752,12 +756,12 @@ extension NMessenger: ASTableDelegate, ASTableDataSource {
     
     //MARK: header
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        return messengerNodeHeader
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == NMessengerSection.messenger.rawValue {
-            return 5
+            return messengerNodeHeadreHeight
         }
         
         return 0
