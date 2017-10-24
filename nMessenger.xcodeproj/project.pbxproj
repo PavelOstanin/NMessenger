@@ -190,6 +190,7 @@
 		7DC39DF1B4B756DDFD05B787 /* Pods_nMessenger_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1258BEA76A856ADC95493DD /* Pods_nMessenger_iOS.framework */; };
 		86F11903BAF6EDD175EB4990 /* Pods_nMessengerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF61F41CAE7391D9E0ED0C81 /* Pods_nMessengerUITests.framework */; };
 		E3186CCB59F60DAAE6093DE0 /* Pods_nMessengerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECF6E0F01811A56BE9AC7F3 /* Pods_nMessengerTests.framework */; };
+		E9F068F41F9F952200AC9D6E /* MessageCustomNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F068F31F9F952200AC9D6E /* MessageCustomNode.swift */; };
 		E9FD77891F976FB4002735ED /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9FD77871F976FB4002735ED /* OpenSans-Regular.ttf */; };
 		E9FD778A1F976FB4002735ED /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9FD77881F976FB4002735ED /* OpenSans-Semibold.ttf */; };
 		F13F39E11D650D490021A858 /* InputBarViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F39E01D650D490021A858 /* InputBarViewProtocol.swift */; };
@@ -411,6 +412,7 @@
 		C4703F66365CF6634E09EB72 /* Pods-nMessenger-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nMessenger-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-nMessenger-iOS/Pods-nMessenger-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D1258BEA76A856ADC95493DD /* Pods_nMessenger_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nMessenger_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F2B49D60E6017D3DF753A1 /* Pods-nMessenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nMessenger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nMessenger/Pods-nMessenger.debug.xcconfig"; sourceTree = "<group>"; };
+		E9F068F31F9F952200AC9D6E /* MessageCustomNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCustomNode.swift; sourceTree = "<group>"; };
 		E9FD77871F976FB4002735ED /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		E9FD77881F976FB4002735ED /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		F13F39E01D650D490021A858 /* InputBarViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputBarViewProtocol.swift; sourceTree = "<group>"; };
@@ -1093,6 +1095,7 @@
 				F1FC872F1D63813700F3C21C /* MessageCellProtocol.swift */,
 				F1FC87301D63813700F3C21C /* MessageGroup.swift */,
 				F1FC87311D63813700F3C21C /* MessageNode.swift */,
+				E9F068F31F9F952200AC9D6E /* MessageCustomNode.swift */,
 			);
 			path = MessageCell;
 			sourceTree = "<group>";
@@ -1808,6 +1811,7 @@
 				F1FC87BD1D63813700F3C21C /* SimpleBubble.swift in Sources */,
 				F1FC87BE1D63813700F3C21C /* StackedBubble.swift in Sources */,
 				F1FC87D01D63813700F3C21C /* NMessenger.swift in Sources */,
+				E9F068F41F9F952200AC9D6E /* MessageCustomNode.swift in Sources */,
 				F1FC87C31D63813700F3C21C /* ImageContentNode.swift in Sources */,
 				F1FC87CB1D63813700F3C21C /* MessageGroup.swift in Sources */,
 				F1418CE91D380B2400C404B5 /* ViewController.swift in Sources */,

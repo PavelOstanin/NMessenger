@@ -540,7 +540,7 @@ open class NMessengerViewController: UIViewController, UITextViewDelegate, NMess
      */
     open func createCustomContentViewMessage(_ view: UIView, isIncomingMessage:Bool) -> GeneralMessengerCell {
         let customView = CustomContentNode(withCustomView: view, bubbleConfiguration: self.sharedBubbleConfiguration)
-        let newMessage = MessageNode(content: customView)
+        let newMessage = MessageCustomNode(content: customView)
         newMessage.cellPadding = messagePadding
         newMessage.currentViewController = self
         newMessage.isIncomingMessage = isIncomingMessage
