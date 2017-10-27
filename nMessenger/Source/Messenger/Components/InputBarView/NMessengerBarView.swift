@@ -120,9 +120,9 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
         if self.textInputView.text.isEmpty {
             self.addInputSelectorPlaceholder()
         }
-        UIView.animate(withDuration: 0.1, animations: {
-            self.sendButton.isEnabled = false
-        }) 
+//        UIView.animate(withDuration: 0.1, animations: {
+//            self.sendButton.isEnabled = false
+//        })
         self.textInputView.resignFirstResponder()
         return true
     }
@@ -201,10 +201,13 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
     @IBAction open func sendButtonClicked(_ sender: AnyObject) {
         textInputViewHeight.constant = textInputViewHeightConst
         textInputAreaViewHeight.constant = textInputViewHeightConst+10
-        if self.textInputView.text != ""
+        if self.textInputView.text != "" && self.textInputView.text != self.inputTextViewPlaceholder
         {
             _ = self.controller.sendText(self.textInputView.text,isIncomingMessage: false)
             self.textInputView.text = ""
+            if !self.textInputView.isFirstResponder{
+                addInputSelectorPlaceholder()
+            }
         }
     }
     /**
