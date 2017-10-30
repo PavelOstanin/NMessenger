@@ -33,7 +33,7 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
     //Reference to CameraViewController
     open lazy var cameraVC: CameraViewController = CameraViewController()
     //CGFloat to the fine the number of rows a user can type
-    open var numberOfRows:CGFloat = 3
+    open var numberOfRows:CGFloat = 4
     //String as placeholder text in input view
     open var inputTextViewPlaceholder: String = "Aa"
     {
@@ -45,7 +45,7 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
     
     //MARK: Private Parameters
     //CGFloat as defualt height for input view
-    fileprivate let textInputViewHeightConst:CGFloat = 30
+    fileprivate let textInputViewHeightConst:CGFloat = 35
     
     // MARK: Initialisers
     /**
@@ -103,7 +103,9 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
      Implementing textViewShouldBeginEditing in order to set the text indictor at position 0
      */
     open func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        textView.text = ""
+        if self.textInputView.text == self.inputTextViewPlaceholder{
+            textView.text = ""
+        }
         textView.textColor = UIColor.n1DarkestGreyColor()
         UIView.animate(withDuration: 0.1, animations: {
             self.sendButton.isEnabled = true
@@ -151,18 +153,18 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
         else if (text != "\n")
         {
             
-            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//            let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//
+//            var textWidth: CGFloat = UIEdgeInsetsInsetRect(textView.frame, textView.textContainerInset).width
+//
+//            textWidth -= 2.0 * textView.textContainer.lineFragmentPadding
+//
+//            let boundingRect: CGRect = newText.boundingRect(with: CGSize(width: textWidth, height: 0), options: [NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading], attributes: [NSFontAttributeName: textView.font!], context: nil)
+//
+//            let numberOfLines = boundingRect.height / textView.font!.lineHeight;
             
-            var textWidth: CGFloat = UIEdgeInsetsInsetRect(textView.frame, textView.textContainerInset).width
             
-            textWidth -= 2.0 * textView.textContainer.lineFragmentPadding
-            
-            let boundingRect: CGRect = newText.boundingRect(with: CGSize(width: textWidth, height: 0), options: [NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading], attributes: [NSFontAttributeName: textView.font!], context: nil)
-            
-            let numberOfLines = boundingRect.height / textView.font!.lineHeight;
-            
-            
-            return numberOfLines <= numberOfRows
+            return true//numberOfLines <= numberOfRows
         }
         return false
     }
@@ -170,18 +172,26 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
      Implementing textViewDidChange in order to resize the text input area
      */
     open func textViewDidChange(_ textView: UITextView) {
-        let fixedWidth = textView.frame.size.width
-        textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        var newFrame = textView.frame
-        newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        let newText = textView.text as NSString
+        var textWidth: CGFloat = UIEdgeInsetsInsetRect(textView.frame, textView.textContainerInset).width
+        textWidth -= 2.0 * textView.textContainer.lineFragmentPadding
+        let boundingRect: CGRect = newText.boundingRect(with: CGSize(width: textWidth, height: 0), options: [NSStringDrawingOptions.usesLineFragmentOrigin,NSStringDrawingOptions.usesFontLeading], attributes: [NSFontAttributeName: textView.font!], context: nil)
+        let numberOfLines = boundingRect.height / textView.font!.lineHeight;
         
-        textInputViewHeight.constant = newFrame.size.height
-        
-        textInputAreaViewHeight.constant = newFrame.size.height+10
-        
-        
-        
+        if numberOfLines <= numberOfRows{
+            textView.isScrollEnabled = false
+            let fixedWidth = textView.frame.size.width
+            textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            var newFrame = textView.frame
+            newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+            textInputViewHeight.constant = newFrame.size.height
+            
+            textInputAreaViewHeight.constant = newFrame.size.height+10
+        }
+        else{
+            textView.isScrollEnabled = true
+        }
     }
     
     //MARK: TextView helper methods
@@ -201,13 +211,16 @@ open class NMessengerBarView: InputBarView, UITextViewDelegate, CameraViewDelega
     @IBAction open func sendButtonClicked(_ sender: AnyObject) {
         textInputViewHeight.constant = textInputViewHeightConst
         textInputAreaViewHeight.constant = textInputViewHeightConst+10
-        if self.textInputView.text != "" && self.textInputView.text != self.inputTextViewPlaceholder
+        if self.textInputView.text != "" && self.textInputView.text != self.inputTextViewPlaceholder && !self.textInputView.text.trimmingCharacters(in: .whitespaces).isEmpty
         {
             _ = self.controller.sendText(self.textInputView.text,isIncomingMessage: false)
             self.textInputView.text = ""
             if !self.textInputView.isFirstResponder{
                 addInputSelectorPlaceholder()
             }
+        }
+        if self.textInputView.text.trimmingCharacters(in: .whitespaces).isEmpty{
+            self.textInputView.text = ""
         }
     }
     /**
