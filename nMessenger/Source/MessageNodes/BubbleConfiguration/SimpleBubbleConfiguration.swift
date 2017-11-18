@@ -43,6 +43,11 @@ open class SimpleBubbleConfiguration: BubbleConfigurationProtocol {
         return UIColor.n1BlueColor()
     }
     
+    open func getCanceledColor() -> UIColor
+    {
+        return UIColor.n1LightGreyColor()
+    }
+    
     open func getBubble() -> Bubble
     {
         let newBubble = SimpleBubble()

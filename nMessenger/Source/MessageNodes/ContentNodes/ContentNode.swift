@@ -22,6 +22,7 @@ public enum ContentNodeState {
     case accept
     case decline
     case delivered
+    case canceled
 }
 
 
@@ -63,6 +64,11 @@ open class ContentNode: ASDisplayNode {
                 self.setNeedsLayout()
             case .delivered:
                 self.backgroundBubble?.bubbleColor = bubbleConfiguration.getDeliveredColor()
+                self.style.minHeight = ASDimension.init(unit: .points, value: 65)
+                self.backgroundBubble?.borderWidth = 0
+                self.setNeedsLayout()
+            case .canceled:
+                self.backgroundBubble?.bubbleColor = bubbleConfiguration.getCanceledColor()
                 self.style.minHeight = ASDimension.init(unit: .points, value: 65)
                 self.backgroundBubble?.borderWidth = 0
                 self.setNeedsLayout()

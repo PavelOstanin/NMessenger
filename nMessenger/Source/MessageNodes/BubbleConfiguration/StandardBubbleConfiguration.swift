@@ -38,6 +38,11 @@ open class StandardBubbleConfiguration: BubbleConfigurationProtocol {
         return UIColor.n1GrayColor()
     }
     
+    open func getCanceledColor() -> UIColor
+    {
+        return UIColor.n1LightGreyColor()
+    }
+    
     open func getDeliveredColor() -> UIColor
     {
         return UIColor.n1BlueColor()

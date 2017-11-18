@@ -38,6 +38,11 @@ open class ImageBubbleConfiguration: BubbleConfigurationProtocol {
         return UIColor.n1Black50Color()
     }
     
+    open func getCanceledColor() -> UIColor
+    {
+        return UIColor.n1LightGreyColor()
+    }
+    
     open func getDeliveredColor() -> UIColor
     {
         return UIColor.n1Black50Color()
