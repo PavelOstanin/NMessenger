@@ -156,7 +156,11 @@ open class TextContentNode: ContentNode,ASTextNodeDelegate {
     /** Updates the attributed string to the correct incoming/outgoing settings and lays out the component again*/
     fileprivate func updateAttributedText() {
         let tmpString = NSMutableAttributedString(attributedString: self.textMessageNode.attributedText!)
-        tmpString.addAttributes([NSForegroundColorAttributeName: state == .none ? (isIncomingMessage ? incomingTextColor : outgoingTextColor) : UIColor.n1WhiteColor(), NSFontAttributeName: isIncomingMessage ? incomingTextFont : outgoingTextFont], range: NSMakeRange(0, tmpString.length))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = state == .none ? .left : .center
+        paragraphStyle.lineBreakMode = .byWordWrapping
+        
+        tmpString.addAttributes([NSForegroundColorAttributeName: state == .none ? (isIncomingMessage ? incomingTextColor : outgoingTextColor) : UIColor.n1WhiteColor(), NSFontAttributeName: isIncomingMessage ? incomingTextFont : outgoingTextFont,NSParagraphStyleAttributeName : paragraphStyle], range: NSMakeRange(0, tmpString.length))
         self.textMessageNode.attributedText = tmpString
         
         setNeedsLayout()
@@ -180,11 +184,9 @@ open class TextContentNode: ContentNode,ASTextNodeDelegate {
             return  ASInsetLayoutSpec(insets: insets, child: textMessageSize)
         }
         else{
-            let textMessageSize = ASStackLayoutSpec()
-            textMessageSize.alignItems = .center
-            textMessageSize.justifyContent = .center
-            textMessageSize.children = [self.textMessageNode]
-            return  ASInsetLayoutSpec(insets: UIEdgeInsets(top: 0, left: 63, bottom: 0, right: 63), child: textMessageSize)
+            let stack = ASStackLayoutSpec(direction: .vertical, spacing: 0, justifyContent: .center, alignItems: .center, children:[self.textMessageNode])
+            stack.style.width = ASDimensionMake(constrainedSize.max.width)
+            return  ASInsetLayoutSpec(insets: insets, child: stack)
         }
     }
     
